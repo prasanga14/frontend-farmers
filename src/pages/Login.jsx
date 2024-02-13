@@ -1,10 +1,27 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/auth.scss';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const handleSubmit = (event) => {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const result = await axios.post('http://localhost:8000/api/user/login', {
+      email,
+      password,
+    });
+    if (result.status) {
+      navigate('/dashboard');
+      const { id, token } = result.data;
+
+      localStorage.setItem('id', id);
+      localStorage.setItem('token', token);
+    }
   };
 
   const handleGoogleAuth = () => {};
@@ -17,10 +34,20 @@ const Login = () => {
           FarmersMedia <span>Login</span>
         </p>
         <div className="input__container">
-          <input type="email" placeholder="Email..." />
+          <input
+            type="email"
+            placeholder="Email..."
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input__container">
-          <input type="password" placeholder="Password..." />
+          <input
+            type="password"
+            placeholder="Password..."
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <button className="auth__action">Login</button>

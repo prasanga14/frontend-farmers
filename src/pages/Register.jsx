@@ -1,10 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../Styles/auth.scss';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
-  const handleSubmit = (event) => {
+  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const navigate = useNavigate();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    const result = await axios.post('http://localhost:8000/api/user/register', {
+      username,
+      email,
+      password,
+    });
+    navigate('/login');
+
+    console.log(result);
   };
 
   const handleGoogleAuth = () => {};
@@ -17,13 +32,28 @@ const Register = () => {
           FarmersMedia <span>Register</span>
         </p>
         <div className="input__container">
-          <input type="text" placeholder="Username..." />
+          <input
+            type="text"
+            placeholder="Username..."
+            name="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </div>
         <div className="input__container">
-          <input type="email" placeholder="Email..." />
+          <input
+            type="email"
+            placeholder="Email..."
+            name="email"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input__container">
-          <input type="password" placeholder="Password..." />
+          <input
+            type="password"
+            placeholder="Password..."
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
 
         <button className="auth__action">Register</button>

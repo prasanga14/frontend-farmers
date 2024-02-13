@@ -17,7 +17,7 @@ const Sidebar = () => {
   return (
     <div className="app__sidebar">
       <h2 className="sidebar__logo">
-        <Link to="/">FarmersMedia</Link>
+        <Link to="/dashboard">FarmersMedia</Link>
       </h2>
 
       <div className="input__container">

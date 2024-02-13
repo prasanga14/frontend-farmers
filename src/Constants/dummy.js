@@ -19,7 +19,7 @@ import { BsCalendar4Event } from 'react-icons/bs';
 export const sidebarRoutes = [
   {
     name: 'Home',
-    path: '/',
+    path: '/dashboard',
     icon: SlHome,
   },
   {
