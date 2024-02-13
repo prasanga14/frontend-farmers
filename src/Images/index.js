@@ -10,6 +10,7 @@ import notFound from './404.png';
 import req1 from './req1.jpg';
 import req2 from './req2.jpg';
 import req3 from './req3.jpg';
+import admin from './admin.png';
 
 export {
   user,
@@ -24,4 +25,5 @@ export {
   req1,
   req2,
   req3,
+  admin,
 };

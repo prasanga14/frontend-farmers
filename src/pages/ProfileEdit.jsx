@@ -32,15 +32,18 @@ const ProfileEdit = () => {
 
           <div className="input__wrapper">
             <div className="input__container">
-              <input type="text" placeholder="Username..." />
+              <input type="text" placeholder="Username..." name="username" />
             </div>
             <div className="input__container">
-              <input type="email" placeholder="Email..." />
+              <input type="email" placeholder="Email..." name="email" />
             </div>
             <div className="input__container">
-              <input type="password" placeholder="Password..." />
+              <input
+                type="password"
+                placeholder="Password..."
+                name="password"
+              />
             </div>
-
             <button>Update</button>
           </div>
         </form>

@@ -14,7 +14,7 @@ const Navbar = () => {
         </div>
         <ul>
           <li>Explore</li>
-          <li>Community feed</li>
+          <li>Weather Data</li>
           <li>Mutual friends</li>
         </ul>
       </div>

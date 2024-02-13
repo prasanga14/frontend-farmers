@@ -1,6 +1,17 @@
-import { img1, img2, img3, img4, user, req1, req2, req3 } from '../Images';
+import {
+  img1,
+  img2,
+  img3,
+  img4,
+  user,
+  req1,
+  req2,
+  req3,
+  admin,
+} from '../Images';
 import { BiCamera, BiImage, BiLinkAlt, BiSmile } from 'react-icons/bi';
 import { SlHome } from 'react-icons/sl';
+import { TiWeatherCloudy } from 'react-icons/ti';
 import { MdCardMembership, MdGroups } from 'react-icons/md';
 import { HiOutlineShoppingBag } from 'react-icons/hi2';
 import { BsCalendar4Event } from 'react-icons/bs';
@@ -12,10 +23,11 @@ export const sidebarRoutes = [
     icon: SlHome,
   },
   {
-    name: 'Community',
-    path: '/community',
-    icon: MdGroups,
+    name: 'Weather',
+    path: '/weather',
+    icon: TiWeatherCloudy,
   },
+
   {
     name: 'Marketplace',
     path: '/marketplace',
@@ -25,11 +37,6 @@ export const sidebarRoutes = [
     name: 'FarmersMedia events',
     path: '/events',
     icon: BsCalendar4Event,
-  },
-  {
-    name: 'News feed',
-    path: '/news',
-    icon: MdCardMembership,
   },
 ];
 
@@ -67,30 +74,30 @@ export const posts = [
   {
     id: 894839543,
     img: img1,
-    text: 'Checking on the growth of the crops.',
-    username: 'Sita Neupane',
-    profile: img1,
+    text: 'Crops should be well watched to maintain good production.',
+    username: 'Admin',
+    profile: admin,
   },
   {
     id: 894839343,
     img: img2,
-    text: 'This year production of crops is less.',
-    username: 'Rajendra Bhusal',
-    profile: img2,
+    text: 'The season of rice harvesting has come.',
+    username: 'Admin',
+    profile: admin,
   },
   {
     id: 894839243,
     img: img3,
-    username: 'Sarita Khanal',
-    text: 'My new setUp.',
-    profile: img3,
+    username: 'Admin',
+    text: 'Sarita from village kavre is working very hard',
+    profile: admin,
   },
   {
     id: 894832843,
     img: img4,
-    text: 'I think my mission on earth is completed.',
-    username: 'Lionel Messi',
-    profile: img4,
+    text: 'Ramesh is working hard to provide for his family',
+    username: 'Admin',
+    profile: admin,
   },
 ];
 
