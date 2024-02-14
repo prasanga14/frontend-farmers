@@ -8,7 +8,6 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 
 const Profile = () => {
-  const token = localStorage.getItem('token');
   const id = localStorage.getItem('id');
 
   // Use state to manage profileName

@@ -1,20 +1,71 @@
 import React from 'react';
-import { comments, posts } from '../Constants/dummy';
+import { posts } from '../Constants/dummy';
 import { ImShare } from 'react-icons/im';
 import { user } from '../Images';
 import { Link, useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import '../Styles/postwrapper.scss';
 import {
   BiCommentDetail,
   BiDotsHorizontalRounded,
   BiLike,
   BiSmile,
 } from 'react-icons/bi';
+import axios from 'axios';
+
+const id = localStorage.getItem('id');
 
 const PostWrapper = () => {
+  const [loggedUser, setLoggedUser] = useState('');
+  const [allComments, setAllComments] = useState([]);
+  const [comment, setComment] = useState('');
+
+  const handleAddComment = async () => {
+    const result = await axios.post('http://localhost:8000/api/user/comments', {
+      name: loggedUser.username,
+      comment,
+    });
+
+    setAllComments([...allComments, result.data.comment]);
+    console.log(result.data.comment.comment);
+    setComment('');
+  };
+
   const location = useLocation();
 
   const pathname = location.pathname.split('/')[2];
   const post = posts.find((post) => post.id.toString() === pathname);
+
+  useEffect(() => {
+    const getLoggedUser = async (id) => {
+      try {
+        const result = await axios.get(
+          `http://localhost:8000/api/user/u/${id}`
+        );
+        setLoggedUser(result.data.user);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    getLoggedUser(id);
+  }, [id]);
+
+  useEffect(() => {
+    const getAllComments = async () => {
+      try {
+        const result = await axios.get(
+          `http://localhost:8000/api/user/comments`
+        );
+        setAllComments(result.data);
+        // console.log(result.data);
+      } catch (error) {
+        console.error('Error fetching user data:', error);
+      }
+    };
+
+    getAllComments();
+  }, []);
 
   return (
     <div className="post__wrapper">
@@ -34,14 +85,16 @@ const PostWrapper = () => {
           <div className="post__content">
             <p className="post__text">Checking on the growth of the crops.</p>
             <div className="comment__container">
-              {comments.map((comment, index) => (
+              {allComments.map((comment, index) => (
                 <div className="comment" key={index}>
-                  <Link to="/profile/222" className="profile">
+                  <Link to={`/profile/${id}`} className="profile">
                     <img src={user} alt="" />
                   </Link>
                   <p>
-                    <b>Ram {''}</b>
-                    <span>Nice Picture</span>
+                    <b className="comment__name">
+                      {comment.name} {'  '}{' '}
+                    </b>
+                    <span>{comment.comment}</span>
                   </p>
                 </div>
               ))}
@@ -64,8 +117,13 @@ const PostWrapper = () => {
 
             <div className="add__comment">
               <BiSmile />
-              <input type="text" placeholder="Add a comment..." />
-              <button>Post</button>
+              <input
+                type="text"
+                placeholder="Add a comment..."
+                name="inputComment"
+                onChange={(e) => setComment(e.target.value)}
+              />
+              <button onClick={(e) => handleAddComment(e)}>Post</button>
             </div>
           </div>
         </div>

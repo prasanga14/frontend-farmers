@@ -1,4 +1,4 @@
-import user from './user.jpg';
+import user from './user.png';
 import addPhoto from './profile.png';
 import postImg from './postImg.jpeg';
 import cover from './cover.png';

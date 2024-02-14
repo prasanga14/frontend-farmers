@@ -1,7 +1,7 @@
-import React from "react";
-import { posts } from "../Constants/dummy";
-import { Post } from "./";
-import "../Styles/posts.scss";
+import React from 'react';
+import { posts } from '../Constants/dummy';
+import { Post } from './';
+import '../Styles/posts.scss';
 
 const Posts = () => {
   return (

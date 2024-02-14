@@ -104,15 +104,23 @@ export const posts = [
 export const comments = [
   {
     id: 894839843,
+    name: 'Person 1',
+    comment: 'Beautiful Picture',
   },
   {
     id: 894839843,
+    name: 'Person 2',
+    comment: 'Great picture ',
   },
   {
     id: 894839843,
+    name: 'Person 3',
+    comment: 'Looking great',
   },
   {
     id: 894839843,
+    name: 'Person 4',
+    comment: 'Stunning',
   },
 ];
 

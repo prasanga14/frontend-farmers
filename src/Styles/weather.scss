@@ -1,0 +1,36 @@
+@import './constants';
+@import './variables';
+
+.weather__container {
+  text-align: center;
+  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  border: 10px solid var(--b-color);
+  margin: auto;
+
+  input {
+    margin-right: 15px;
+    padding: 10px;
+    width: 200px;
+    margin: 1px;
+  }
+
+  button {
+    padding: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin: 1px;
+    background: var(--b-color);
+    border-radius: 15px;
+  }
+  button:hover {
+    color: whitesmoke;
+  }
+
+  .weather-info {
+    margin: 20px;
+    background-color: black;
+    padding: 20px;
+  }
+}

@@ -1,6 +1,15 @@
 import { useSelector } from 'react-redux';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import { Home, Login, Register, Profile, ProfileEdit, Post } from './pages';
+import {
+  Home,
+  Login,
+  Register,
+  Profile,
+  ProfileEdit,
+  Post,
+  Posts,
+  Weather,
+} from './pages';
 import PrivateRoutes from './utils/PrivateRoutes.js';
 import './Styles/app.scss';
 
@@ -13,8 +22,10 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route element={<PrivateRoutes />}>
-            <Route path="/dashboard" element={<Home />} exact />
+            <Route path="/dashboard" element={<Home />} />
           </Route>
+          <Route path="/weather" element={<Weather />} />
+          <Route path="/events" element={<Posts />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:id" element={<Profile />} />
