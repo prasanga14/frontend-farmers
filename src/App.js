@@ -9,8 +9,11 @@ import {
   Post,
   Posts,
   Weather,
+  MakePost,
+  AdminDashboard,
 } from './pages';
 import PrivateRoutes from './utils/PrivateRoutes.js';
+import AdminPrivateRoute from './utils/AdminPrivateRoute.js';
 import './Styles/app.scss';
 
 function App() {
@@ -24,7 +27,11 @@ function App() {
           <Route element={<PrivateRoutes />}>
             <Route path="/dashboard" element={<Home />} />
           </Route>
+          <Route element={<AdminPrivateRoute />}>
+            <Route path="/admin" element={<AdminDashboard />} />
+          </Route>
           <Route path="/weather" element={<Weather />} />
+          <Route path="/makepost" element={<MakePost />} />
           <Route path="/events" element={<Posts />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />

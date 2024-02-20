@@ -1,0 +1,39 @@
+@import './constants';
+@import './variables';
+
+.make_post_home {
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: $border;
+  height: 25vh;
+}
+
+.heading__primary__post {
+  margin-bottom: 12px;
+}
+
+.make_post_home input {
+  width: 100%;
+  padding: 5px 5px;
+  // background-color: red;
+  font-weight: bold;
+}
+
+.post__btn {
+  font-weight: bold;
+  @include button;
+  color: var(--b-color);
+  border: 2px solid var(--b-color);
+  margin-top: 12px;
+  border-radius: 15px;
+}
+.post__btn:hover {
+  color: whitesmoke;
+}
+
+.file__input {
+  font-weight: bolder;
+}

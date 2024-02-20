@@ -23,8 +23,8 @@ export const Weather = () => {
           wind: `Wind: ${data.wind.speed} km/h`,
           condition: `Weather Condition: ${data.weather[0].description}`,
           rainPrediction: data.rain
-            ? `It might rain in ${data.name} today: ${data.rain['1h']} mm`
-            : `No rain prediction in ${data.name} today`,
+            ? `It might rain in ${data.name} today: ${data.rain['1h']} mm and not suitable for irrigation`
+            : `No rain prediction in ${data.name} today and suitable for irrigation`,
         };
 
         setWeatherInfo(weather);

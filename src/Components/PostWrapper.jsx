@@ -1,41 +1,26 @@
 import React from 'react';
-import { posts } from '../Constants/dummy';
+import { useState, useEffect } from 'react';
+// import { comments /*posts */ } from '../Constants/dummy';
 import { ImShare } from 'react-icons/im';
 import { user } from '../Images';
-import { Link, useLocation } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import '../Styles/postwrapper.scss';
+import axios from 'axios';
 import {
   BiCommentDetail,
   BiDotsHorizontalRounded,
   BiLike,
   BiSmile,
 } from 'react-icons/bi';
-import axios from 'axios';
-
-const id = localStorage.getItem('id');
 
 const PostWrapper = () => {
-  const [loggedUser, setLoggedUser] = useState('');
-  const [allComments, setAllComments] = useState([]);
-  const [comment, setComment] = useState('');
+  const [post, setPost] = useState({});
+  const [loggedUser, setLoggedUser] = useState({});
+  const [currPostId, setCurrPostId] = useState('');
+  const [userComment, setUserComment] = useState('');
+  const [comments, setComments] = useState([]);
 
-  const handleAddComment = async () => {
-    const result = await axios.post('http://localhost:8000/api/user/comments', {
-      name: loggedUser.username,
-      comment,
-    });
-
-    setAllComments([...allComments, result.data.comment]);
-    console.log(result.data.comment.comment);
-    setComment('');
-  };
-
-  const location = useLocation();
-
-  const pathname = location.pathname.split('/')[2];
-  const post = posts.find((post) => post.id.toString() === pathname);
-
+  // Assuming localStorage.getItem('id') contains the user ID
   useEffect(() => {
     const getLoggedUser = async (id) => {
       try {
@@ -44,60 +29,124 @@ const PostWrapper = () => {
         );
         setLoggedUser(result.data.user);
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching logged user:', error);
       }
     };
 
-    getLoggedUser(id);
-  }, [id]);
+    getLoggedUser(localStorage.getItem('id'));
+  }, []);
 
   useEffect(() => {
-    const getAllComments = async () => {
+    // Assuming your URL looks like "http://localhost:3000/profile/65d499a3c73d061959f7ea2c"
+    const currentUrl = window.location.href;
+
+    // Extract the ID from the URL
+    const idStartIndex = currentUrl.lastIndexOf('/') + 1;
+    const postId = currentUrl.substring(idStartIndex);
+    setCurrPostId(postId);
+  }, []);
+
+  useEffect(() => {
+    const getSinglePost = async (postId) => {
       try {
         const result = await axios.get(
-          `http://localhost:8000/api/user/comments`
+          `http://localhost:8000/api/post/single-post/${postId}`
         );
-        setAllComments(result.data);
-        // console.log(result.data);
+        setPost(result.data);
+        setComments(result.data.comments || []); // Set comments from API response
       } catch (error) {
-        console.error('Error fetching user data:', error);
+        console.error('Error fetching single post:', error);
       }
     };
 
-    getAllComments();
-  }, []);
+    if (currPostId) {
+      getSinglePost(currPostId);
+    }
+  }, [currPostId]);
+
+  const handlePostComment = async (e) => {
+    e.preventDefault();
+
+    const newUserComment = {
+      commentId: new Date().getUTCMilliseconds(),
+      comment: userComment,
+      name: loggedUser.username,
+    };
+
+    try {
+      // Send POST request to update the server
+      await axios.post(
+        `http://localhost:8000/api/post/add-comment/${currPostId}`,
+        {
+          comment: newUserComment,
+        }
+      );
+
+      // Update comments state with the new comment
+      setComments([...comments, newUserComment]);
+
+      // Clear the comment input field
+      setUserComment('');
+    } catch (error) {
+      console.error('Error adding comment:', error);
+    }
+  };
+
+  const handleDeleteComment = async (commentId) => {
+    try {
+      // Send DELETE request to delete the comment
+      await axios.delete(
+        `http://localhost:8000/api/post/delete-comment/${currPostId}/${commentId}`
+      );
+
+      // Update comments state by removing the deleted comment
+      setComments(
+        comments.filter((comment) => comment.commentId !== commentId)
+      );
+    } catch (error) {
+      console.error('Error deleting comment:', error);
+    }
+  };
 
   return (
     <div className="post__wrapper">
       <div className="post__wrapper__container">
         <div className="post__img">
-          <img src={post.img} alt="" />
+          <img src={`http://localhost:8000/images/${post.image}`} alt="" />
         </div>
         <div className="post__wrapper__content">
           <div className="user__post">
-            <Link to="/profile/2222" className="user__profile">
-              <img src={post.profile} alt="" />
-              <p>{post.username}</p>
+            <Link to={`/profile/${post._id}`} className="user__profile">
+              <img src={loggedUser.profilePicture} alt="" />
+              <p>{loggedUser.username}</p>
             </Link>
             <BiDotsHorizontalRounded />
           </div>
 
           <div className="post__content">
-            <p className="post__text">Checking on the growth of the crops.</p>
+            <p className="post__text">{post.text}</p>
             <div className="comment__container">
-              {allComments.map((comment, index) => (
-                <div className="comment" key={index}>
-                  <Link to={`/profile/${id}`} className="profile">
-                    <img src={user} alt="" />
-                  </Link>
-                  <p>
-                    <b className="comment__name">
-                      {comment.name} {'  '}{' '}
-                    </b>
-                    <span>{comment.comment}</span>
-                  </p>
-                </div>
-              ))}
+              {comments && comments.length > 0 ? (
+                comments.map((comment, index) => (
+                  <div className="comment" key={index}>
+                    <Link to={`/profile/55`} className="profile">
+                      <img src={user} alt="" />
+                    </Link>
+                    <p>
+                      <b className="comment__name">{comment.name} </b>
+                      <span>{comment.comment}</span>
+                    </p>
+                    <span
+                      onClick={() => handleDeleteComment(comment.commentId)}
+                      className="material-symbols-outlined deleteIcon"
+                    >
+                      delete
+                    </span>
+                  </div>
+                ))
+              ) : (
+                <p>No comments available.</p>
+              )}
             </div>
           </div>
 
@@ -108,7 +157,7 @@ const PostWrapper = () => {
               </li>
               <li>
                 <BiCommentDetail />
-                Comment <span>30</span>{' '}
+                Comment <span> {comments.length} </span>{' '}
               </li>
               <li>
                 <ImShare /> Share <span>30</span>{' '}
@@ -118,12 +167,12 @@ const PostWrapper = () => {
             <div className="add__comment">
               <BiSmile />
               <input
+                onChange={(e) => setUserComment(e.target.value)}
                 type="text"
                 placeholder="Add a comment..."
                 name="inputComment"
-                onChange={(e) => setComment(e.target.value)}
               />
-              <button onClick={(e) => handleAddComment(e)}>Post</button>
+              <button onClick={handlePostComment}>Post</button>
             </div>
           </div>
         </div>

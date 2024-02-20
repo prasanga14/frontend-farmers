@@ -1,5 +1,26 @@
-@import "./constants";
-@import "./variables";
+@import './constants';
+@import './variables';
+
+// Define a media query mixin
+@mixin mediaQuery($size) {
+  @if $size == sm {
+    @media (max-width: 576px) {
+      @content;
+    }
+  } @else if $size == md {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $size == lg {
+    @media (max-width: 992px) {
+      @content;
+    }
+  } @else if $size == xl {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  }
+}
 
 .app__post {
   width: 100%;
@@ -62,6 +83,7 @@
           .comment__container {
             @include flexDirection(column);
             gap: $sm-gap;
+            overflow-y: auto;
 
             .comment {
               @include flexDirection(row);
@@ -70,6 +92,18 @@
 
             img {
               @include userProfile;
+            }
+
+            // Check if the content exceeds a certain height and apply styles accordingly
+            max-height: 300px; // Set a default maximum height
+            height: min-content; // Allow the container to grow as needed
+
+            @include mediaQuery(md) {
+              max-height: 200px; // Adjust for smaller screens
+            }
+
+            @include mediaQuery(sm) {
+              max-height: 150px; // Adjust for even smaller screens
             }
           }
         }

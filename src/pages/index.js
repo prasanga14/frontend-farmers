@@ -6,5 +6,18 @@ import ProfileEdit from './ProfileEdit';
 import Post from './Post';
 import Weather from './Weather';
 import { Posts } from '../Components';
+import MakePost from './MakePost';
+import AdminDashboard from './AdminDashboard';
 
-export { Login, Register, Home, Profile, ProfileEdit, Post, Weather, Posts };
+export {
+  Login,
+  Register,
+  Home,
+  Profile,
+  ProfileEdit,
+  Post,
+  Weather,
+  Posts,
+  MakePost,
+  AdminDashboard,
+};

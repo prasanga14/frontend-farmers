@@ -4,3 +4,8 @@
 .comment__name {
   color: var(--b-color);
 }
+
+.deleteIcon {
+  gap: $gap;
+  cursor: pointer;
+}

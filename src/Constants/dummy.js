@@ -14,7 +14,7 @@ import { SlHome } from 'react-icons/sl';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { MdCardMembership, MdGroups } from 'react-icons/md';
 import { HiOutlineShoppingBag } from 'react-icons/hi2';
-import { BsCalendar4Event } from 'react-icons/bs';
+import { BsCalendar4Event, BsFilePost } from 'react-icons/bs';
 
 export const sidebarRoutes = [
   {
@@ -37,6 +37,30 @@ export const sidebarRoutes = [
     name: 'FarmersMedia events',
     path: '/events',
     icon: BsCalendar4Event,
+  },
+];
+
+export const sidebarRoutesAdmin = [
+  {
+    name: 'Home',
+    path: '/admin',
+    icon: SlHome,
+  },
+  {
+    name: 'Weather',
+    path: '/weather',
+    icon: TiWeatherCloudy,
+  },
+
+  {
+    name: 'Marketplace',
+    path: '/marketplace',
+    icon: HiOutlineShoppingBag,
+  },
+  {
+    name: 'Create Post',
+    path: '/makepost',
+    icon: BsFilePost,
   },
 ];
 

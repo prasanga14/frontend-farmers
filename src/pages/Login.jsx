@@ -15,12 +15,26 @@ const Login = () => {
       email,
       password,
     });
-    if (result.status) {
+
+    const username = result.data.username;
+
+    const usernameArr = username.split(' ');
+
+    if (result.status && !usernameArr.includes('Admin')) {
       navigate('/dashboard');
       const { id, token } = result.data;
 
       localStorage.setItem('id', id);
       localStorage.setItem('token', token);
+    }
+
+    if (result.status && usernameArr.includes('Admin')) {
+      navigate('/admin');
+      const { id, token, username } = result.data;
+
+      localStorage.setItem('id', id);
+      localStorage.setItem('token', token);
+      localStorage.setItem('username', username);
     }
   };
 
