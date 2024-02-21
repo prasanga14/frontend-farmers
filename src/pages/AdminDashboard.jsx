@@ -18,6 +18,7 @@ const AdminDashboard = () => {
         <Navbar />
         <div className="home__content">
           <div className="posts__wrapper__container">
+            <Share />
             <Posts />
           </div>
           <FeedSidebar />

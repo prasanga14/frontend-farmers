@@ -12,11 +12,14 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await axios.post('http://localhost:8000/api/user/register', {
-      username,
-      email,
-      password,
-    });
+    const result = await axios.post(
+      'https://farmers-backend.onrender.com/api/user/register',
+      {
+        username,
+        email,
+        password,
+      }
+    );
     navigate('/login');
 
     console.log(result);

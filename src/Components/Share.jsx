@@ -4,10 +4,6 @@ import { user } from '../Images';
 import { shareOptions } from '../Constants/dummy';
 
 const Share = () => {
-  const handlePost = () => {
-    alert('This feature is currently unavailable in beta version');
-  };
-
   return (
     <div className="share__container">
       <div className="share__top">
@@ -24,7 +20,7 @@ const Share = () => {
             </li>
           ))}
         </ul>
-        <button onClick={handlePost}>Post</button>
+        <button>Post</button>
       </div>
     </div>
   );

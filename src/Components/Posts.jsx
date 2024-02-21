@@ -9,7 +9,7 @@ const Posts = () => {
   useEffect(() => {
     const getAllPosts = async () => {
       const result = await axios.get(
-        'http://localhost:8000/api/post/all-posts'
+        'https://farmers-backend.onrender.com/api/post/all-posts'
       );
       // console.log(result.data);
       setPosts(result.data);

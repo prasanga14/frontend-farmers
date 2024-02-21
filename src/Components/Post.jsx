@@ -42,7 +42,7 @@ const Post = ({ post }) => {
       <div className="post__preview">
         <Link to={`/post/${post._id}`}>
           <img
-            src={`http://localhost:8000/images/${post.image}`}
+            src={`https://farmers-backend.onrender.com/images/${post.image}`}
             alt="FarmersMedia post"
           />
         </Link>

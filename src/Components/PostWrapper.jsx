@@ -24,7 +24,7 @@ const PostWrapper = () => {
     const getLoggedUser = async (id) => {
       try {
         const result = await axios.get(
-          `http://localhost:8000/api/user/u/${id}`
+          `https://farmers-backend.onrender.com/api/user/u/${id}`
         );
         setLoggedUser(result.data.user);
       } catch (error) {
@@ -46,7 +46,7 @@ const PostWrapper = () => {
     const getSinglePost = async (postId) => {
       try {
         const result = await axios.get(
-          `http://localhost:8000/api/post/single-post/${postId}`
+          `https://farmers-backend.onrender.com/api/post/single-post/${postId}`
         );
         setPost(result.data);
         setComments(result.data.comments || []);
@@ -73,7 +73,7 @@ const PostWrapper = () => {
 
     try {
       await axios.post(
-        `http://localhost:8000/api/post/add-comment/${currPostId}`,
+        `https://farmers-backend.onrender.com/api/post/add-comment/${currPostId}`,
         {
           comment: newUserComment,
         }
@@ -96,7 +96,7 @@ const PostWrapper = () => {
         )
       ) {
         await axios.delete(
-          `http://localhost:8000/api/post/delete-comment/${currPostId}/${commentId}`
+          `https://farmers-backend.onrender.com/api/post/delete-comment/${currPostId}/${commentId}`
         );
         setComments(
           comments.filter((comment) => comment.commentId !== commentId)
@@ -113,7 +113,10 @@ const PostWrapper = () => {
     <div className="post__wrapper">
       <div className="post__wrapper__container">
         <div className="post__img">
-          <img src={`http://localhost:8000/images/${post.image}`} alt="" />
+          <img
+            src={`https://farmers-backend.onrender.com/images/${post.image}`}
+            alt=""
+          />
         </div>
         <div className="post__wrapper__content">
           <div className="user__post">
@@ -137,12 +140,15 @@ const PostWrapper = () => {
                       <b className="comment__name">{comment.name} </b>
                       <span>{comment.comment}</span>
                     </p>
-                    <span
-                      onClick={() => handleDeleteComment(comment.commentId)}
-                      className="material-symbols-outlined deleteIcon"
-                    >
-                      delete
-                    </span>
+
+                    {comment.name === loggedUser.username && (
+                      <span
+                        onClick={() => handleDeleteComment(comment.commentId)}
+                        className="material-symbols-outlined deleteIcon"
+                      >
+                        delete
+                      </span>
+                    )}
                   </div>
                 ))
               ) : (

@@ -13,7 +13,7 @@ const PrivateRoutes = () => {
     const getLoggedUser = async (id) => {
       try {
         const result = await axios.get(
-          `http://localhost:8000/api/user/u/${id}`
+          `https://farmers-backend.onrender.com/api/user/u/${id}`
         );
         setUser(result.data);
       } catch (error) {
