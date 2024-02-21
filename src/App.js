@@ -11,6 +11,8 @@ import {
   Weather,
   MakePost,
   AdminDashboard,
+  MarketPlace,
+  ProfessionalSupport,
 } from './pages';
 import PrivateRoutes from './utils/PrivateRoutes.js';
 import AdminPrivateRoute from './utils/AdminPrivateRoute.js';
@@ -30,9 +32,14 @@ function App() {
           <Route element={<AdminPrivateRoute />}>
             <Route path="/admin" element={<AdminDashboard />} />
           </Route>
-          <Route path="/weather" element={<Weather />} />
           <Route path="/makepost" element={<MakePost />} />
+          <Route path="/weather" element={<Weather />} />
           <Route path="/events" element={<Posts />} />
+          <Route path="/marketplace" element={<MarketPlace />} />
+          <Route
+            path="/contactprofessional"
+            element={<ProfessionalSupport />}
+          />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/profile/:id" element={<Profile />} />

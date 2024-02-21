@@ -51,7 +51,7 @@ const Post = ({ post }) => {
             <BiLike /> Like <span>30</span>
           </li>
           <li>
-            <BiCommentDetail /> Comment <span>30</span>
+            <BiCommentDetail /> Comment <span> {post.comments.length} </span>
           </li>
           <li>
             <ImShare /> Share <span>30</span>

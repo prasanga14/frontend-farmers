@@ -1,0 +1,46 @@
+@import './constants';
+@import './variables';
+
+.App {
+  flex-direction: column;
+}
+
+.heading__market {
+  margin-bottom: 15px;
+  margin-top: 10px;
+  text-align: center;
+  color: var(--b-color);
+  font-size: 3.5rem;
+}
+
+.marketplace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  // justify-content: space-around;
+  height: 50%;
+
+  .marketplace__item {
+    width: 200px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    text-align: center;
+
+    .item__image {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    .item__name {
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .item__price {
+      margin-top: 8px;
+      color: rgb(12, 255, 12);
+    }
+  }
+}

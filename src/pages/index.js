@@ -8,6 +8,8 @@ import Weather from './Weather';
 import { Posts } from '../Components';
 import MakePost from './MakePost';
 import AdminDashboard from './AdminDashboard';
+import MarketPlace from './MarketPlace';
+import ProfessionalSupport from './ProfessionalSupport';
 
 export {
   Login,
@@ -20,4 +22,6 @@ export {
   Posts,
   MakePost,
   AdminDashboard,
+  MarketPlace,
+  ProfessionalSupport,
 };

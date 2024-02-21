@@ -20,7 +20,6 @@ const PostWrapper = () => {
   const [userComment, setUserComment] = useState('');
   const [comments, setComments] = useState([]);
 
-  // Assuming localStorage.getItem('id') contains the user ID
   useEffect(() => {
     const getLoggedUser = async (id) => {
       try {
@@ -37,10 +36,7 @@ const PostWrapper = () => {
   }, []);
 
   useEffect(() => {
-    // Assuming your URL looks like "http://localhost:3000/profile/65d499a3c73d061959f7ea2c"
     const currentUrl = window.location.href;
-
-    // Extract the ID from the URL
     const idStartIndex = currentUrl.lastIndexOf('/') + 1;
     const postId = currentUrl.substring(idStartIndex);
     setCurrPostId(postId);
@@ -53,7 +49,7 @@ const PostWrapper = () => {
           `http://localhost:8000/api/post/single-post/${postId}`
         );
         setPost(result.data);
-        setComments(result.data.comments || []); // Set comments from API response
+        setComments(result.data.comments || []);
       } catch (error) {
         console.error('Error fetching single post:', error);
       }
@@ -73,8 +69,9 @@ const PostWrapper = () => {
       name: loggedUser.username,
     };
 
+    if (!userComment) return;
+
     try {
-      // Send POST request to update the server
       await axios.post(
         `http://localhost:8000/api/post/add-comment/${currPostId}`,
         {
@@ -82,11 +79,8 @@ const PostWrapper = () => {
         }
       );
 
-      // Update comments state with the new comment
       setComments([...comments, newUserComment]);
-
-      // Clear the comment input field
-      setUserComment('');
+      setUserComment(() => '');
     } catch (error) {
       console.error('Error adding comment:', error);
     }
@@ -94,15 +88,22 @@ const PostWrapper = () => {
 
   const handleDeleteComment = async (commentId) => {
     try {
-      // Send DELETE request to delete the comment
-      await axios.delete(
-        `http://localhost:8000/api/post/delete-comment/${currPostId}/${commentId}`
-      );
-
-      // Update comments state by removing the deleted comment
-      setComments(
-        comments.filter((comment) => comment.commentId !== commentId)
-      );
+      if (
+        comments.some(
+          (comment) =>
+            comment.commentId === commentId &&
+            comment.name === loggedUser.username
+        )
+      ) {
+        await axios.delete(
+          `http://localhost:8000/api/post/delete-comment/${currPostId}/${commentId}`
+        );
+        setComments(
+          comments.filter((comment) => comment.commentId !== commentId)
+        );
+      } else {
+        console.log('You are not allowed to delete this comment.');
+      }
     } catch (error) {
       console.error('Error deleting comment:', error);
     }
@@ -167,6 +168,7 @@ const PostWrapper = () => {
             <div className="add__comment">
               <BiSmile />
               <input
+                value={userComment}
                 onChange={(e) => setUserComment(e.target.value)}
                 type="text"
                 placeholder="Add a comment..."
