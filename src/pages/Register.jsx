@@ -13,7 +13,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(`http://localhost:8000/api/user/register`, {
+    await axios.post(`https://farmers-backend.onrender.com/api/user/register`, {
       username,
       email,
       password,

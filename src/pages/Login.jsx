@@ -12,10 +12,13 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const result = await axios.post(`http://localhost:8000/api/user/login`, {
-      email,
-      password,
-    });
+    const result = await axios.post(
+      `https://farmers-backend.onrender.com/api/user/login`,
+      {
+        email,
+        password,
+      }
+    );
 
     const username = result.data.username;
 

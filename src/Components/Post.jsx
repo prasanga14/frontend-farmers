@@ -21,7 +21,9 @@ const Post = ({ post }) => {
 
   const getLoggedUser = async () => {
     const user = await axios.get(
-      `http://localhost:8000/api/user/u/${localStorage.getItem('id')}`
+      `https://farmers-backend.onrender.com/api/user/u/${localStorage.getItem(
+        'id'
+      )}`
     );
 
     setLoggedUser(user.data.user.username);
@@ -31,7 +33,7 @@ const Post = ({ post }) => {
 
   const deletePost = async () => {
     const response = await axios.delete(
-      `http://localhost:8000/api/post/delete-post/${post._id}`
+      `https://farmers-backend.onrender.com/api/post/delete-post/${post._id}`
     );
 
     console.log('Post deletion sucessfull!!!');
@@ -71,7 +73,7 @@ const Post = ({ post }) => {
       <div className="post__preview">
         <Link to={`/post/${post._id}`}>
           <img
-            src={`http://localhost:8000/images/${post.image}`}
+            src={`https://farmers-backend.onrender.com/images/${post.image}`}
             alt="FarmersMedia post"
           />
         </Link>
