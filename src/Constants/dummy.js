@@ -16,14 +16,23 @@ import {
   guavas,
   oranges,
   cabbages,
-  carrots,
+  garlic,
   chillies,
   cauliflower,
   onions,
   karelas,
   spinach,
+  greenOnion,
+  apples,
 } from '../marketImages';
-import { BiCamera, BiImage, BiLinkAlt, BiSmile } from 'react-icons/bi';
+import {
+  BiCamera,
+  BiFile,
+  BiFileBlank,
+  BiImage,
+  BiLinkAlt,
+  BiSmile,
+} from 'react-icons/bi';
 import { SlHome } from 'react-icons/sl';
 import { TiWeatherCloudy } from 'react-icons/ti';
 import { MdCardMembership, MdGroups, MdContactPage } from 'react-icons/md';
@@ -37,7 +46,7 @@ export const sidebarRoutes = [
     icon: SlHome,
   },
   {
-    name: 'Weather',
+    name: 'Detailed Weather Info',
     path: '/weather',
     icon: TiWeatherCloudy,
   },
@@ -66,7 +75,7 @@ export const sidebarRoutesAdmin = [
     icon: SlHome,
   },
   {
-    name: 'Weather',
+    name: 'Detailed Weather Info',
     path: '/weather',
     icon: TiWeatherCloudy,
   },
@@ -75,11 +84,6 @@ export const sidebarRoutesAdmin = [
     name: 'Marketplace',
     path: '/marketplace',
     icon: HiOutlineShoppingBag,
-  },
-  {
-    name: 'Create Post',
-    path: '/makepost',
-    icon: BsFilePost,
   },
 ];
 
@@ -102,6 +106,7 @@ export const shareOptions = [
   {
     icon: BiCamera,
   },
+
   {
     icon: BiImage,
   },
@@ -201,8 +206,13 @@ export const marketItems = [
     price: 'NRS.120 per k/g',
   },
   {
-    itemImage: carrots,
-    itemName: 'Carrots',
+    itemImage: apples,
+    itemName: 'Apples',
+    price: 'NRS.120 per k/g',
+  },
+  {
+    itemImage: garlic,
+    itemName: 'Garlic',
     price: 'NRS.120 per k/g',
   },
   {
@@ -230,6 +240,12 @@ export const marketItems = [
   {
     itemImage: spinach,
     itemName: 'Spinach',
+    price: 'NRS.120 per k/g',
+  },
+
+  {
+    itemImage: greenOnion,
+    itemName: 'Green Onion',
     price: 'NRS.120 per k/g',
   },
 ];

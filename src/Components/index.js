@@ -9,6 +9,7 @@ import Friends from './Friends';
 import HomeLoader from './HomeLoader';
 import PostWrapper from './PostWrapper';
 import AdminSidebar from './AdminSidebar';
+import WeatherCard from './WeatherCard';
 
 export {
   Sidebar,
@@ -22,4 +23,5 @@ export {
   HomeLoader,
   PostWrapper,
   AdminSidebar,
+  WeatherCard,
 };

@@ -1,0 +1,55 @@
+@import './constants';
+@import './variables';
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+.card {
+  // margin: 100px auto;
+  width: 320px;
+  height: 320px;
+  background-color: $primary-color;
+  // background-color: #c1bcbc;
+  border-radius: 7px;
+  box-shadow: 0.3px 0.3px 0.3px 1px rgba(0, 0, 0, 0.2);
+  font-family: 'Roboto', sans-serif;
+}
+
+.city,
+.date {
+  // color: $b-color;
+  color: white;
+  margin-left: 35px;
+}
+
+.city {
+  padding-top: 50px;
+  font-size: 26px;
+}
+
+.date {
+  font-size: 20px;
+  line-height: 40px;
+}
+
+.sun {
+  position: absolute;
+  display: inline;
+  margin-left: 35px;
+  width: 70px;
+  height: 70px;
+  background: #ffc107;
+  -moz-border-radius: 50px;
+  -webkit-border-radius: 50px;
+  border-radius: 50px;
+}
+
+.weatherIcon {
+  width: 100px; /* Adjust as needed */
+  margin-left: 10px;
+}
+
+.temperature {
+  padding-left: 15px;
+  font-size: 30px;
+  // color: $b-color;
+  color: #fff;
+}

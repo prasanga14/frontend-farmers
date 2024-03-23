@@ -6,6 +6,7 @@ import { cover, user } from '../Images';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import env from 'react-dotenv';
 
 const Profile = () => {
   const id = localStorage.getItem('id');
@@ -17,7 +18,7 @@ const Profile = () => {
     const getLoggedUser = async (id) => {
       try {
         const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/user/u/${id}`
+          `http://localhost:8000/api/user/u/${id}`
         );
         setProfileName(result.data.user.username);
       } catch (error) {

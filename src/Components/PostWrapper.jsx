@@ -12,6 +12,7 @@ import {
   BiLike,
   BiSmile,
 } from 'react-icons/bi';
+import env from 'react-dotenv';
 
 const PostWrapper = () => {
   const [post, setPost] = useState({});
@@ -24,7 +25,7 @@ const PostWrapper = () => {
     const getLoggedUser = async (id) => {
       try {
         const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/user/u/${id}`
+          `http://localhost:8000/api/user/u/${id}`
         );
         setLoggedUser(result.data.user);
       } catch (error) {
@@ -46,7 +47,7 @@ const PostWrapper = () => {
     const getSinglePost = async (postId) => {
       try {
         const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/post/single-post/${postId}`
+          `http://localhost:8000/api/post/single-post/${postId}`
         );
         setPost(result.data);
         setComments(result.data.comments || []);
@@ -73,7 +74,7 @@ const PostWrapper = () => {
 
     try {
       await axios.post(
-        `https://farmers-backend.onrender.com/api/post/add-comment/${currPostId}`,
+        `http://localhost:8000/api/post/add-comment/${currPostId}`,
         {
           comment: newUserComment,
         }
@@ -96,7 +97,7 @@ const PostWrapper = () => {
         )
       ) {
         await axios.delete(
-          `https://farmers-backend.onrender.com/api/post/delete-comment/${currPostId}/${commentId}`
+          `http://localhost:8000/api/post/delete-comment/${currPostId}/${commentId}`
         );
         setComments(
           comments.filter((comment) => comment.commentId !== commentId)
@@ -113,10 +114,7 @@ const PostWrapper = () => {
     <div className="post__wrapper">
       <div className="post__wrapper__container">
         <div className="post__img">
-          <img
-            src={`https://farmers-backend.onrender.com/images/${post.image}`}
-            alt=""
-          />
+          <img src={`http://localhost:8000/images/${post.image}`} alt="" />
         </div>
         <div className="post__wrapper__content">
           <div className="user__post">

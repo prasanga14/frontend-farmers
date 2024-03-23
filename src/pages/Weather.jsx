@@ -1,39 +1,47 @@
 import React, { useState } from 'react';
 import '../Styles/weather.scss';
-export const Weather = () => {
+
+const Weather = () => {
   const [city, setCity] = useState('');
   const [weatherInfo, setWeatherInfo] = useState(null);
 
-  function getWeather() {
+  const getWeather = () => {
     const apiKey = '8077b9d3132b56e84563d8f43816e55f';
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
 
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
-        // console.log(data);
-        let MT = Math.round(data.main.temp);
-        let FL = Math.round(data.main.feels_like);
+        let temperature = Math.round(data.main.temp);
+        let feelsLike = Math.round(data.main.feels_like);
+        let humidity = data.main.humidity;
+        let windSpeed = data.wind.speed;
+
+        // Add your rain prediction logic here
+        let rainPrediction = 'No rain prediction available';
+
+        if (temperature > 20 && humidity > 60 && windSpeed < 10) {
+          rainPrediction = 'It might rain soon. Not suitable for irrigation.';
+        } else {
+          rainPrediction = 'No rain expected. Suitable for irrigation.';
+        }
 
         const weather = {
-          location: `Weather in ${data.name}`,
-          temperature: `Temperature: ${MT} °C`,
-          feelsLike: `Feels Like: ${FL} °C`,
-          humidity: `Humidity: ${data.main.humidity} %`,
-          wind: `Wind: ${data.wind.speed} km/h`,
-          condition: `Weather Condition: ${data.weather[0].description}`,
-          rainPrediction: data.rain
-            ? `It might rain in ${data.name} today: ${data.rain['1h']} mm and not suitable for irrigation`
-            : `No rain prediction in ${data.name} today and suitable for irrigation`,
+          location: data.name,
+          temperature: `${temperature}°C`,
+          feelsLike: `Feels Like: ${feelsLike}°C`,
+          humidity: `Humidity: ${humidity}%`,
+          wind: `Wind: ${windSpeed} km/h`,
+          condition: `Weather: ${data.weather[0].description}`,
+          rainPrediction: rainPrediction,
         };
 
         setWeatherInfo(weather);
       })
-
       .catch((error) => {
         console.error(error);
       });
-  }
+  };
 
   return (
     <div className="weather__container">

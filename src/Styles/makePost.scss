@@ -2,21 +2,21 @@
 @import './variables';
 
 .make_post_home {
-  display: flex;
-  margin: auto;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   border: $border;
-  height: 25vh;
+  width: 100%;
+  padding: 12px 12px;
+  // margin: auto;
 }
 
 .heading__primary__post {
   margin-bottom: 12px;
+  font-size: 28px;
+  color: $b-color;
 }
 
 .make_post_home input {
-  width: 100%;
+  width: 50%;
+  display: block;
   padding: 5px 5px;
   // background-color: red;
   font-weight: bold;
@@ -36,4 +36,11 @@
 
 .file__input {
   font-weight: bolder;
+  width: 100%;
+  @include input;
+  color: var(--text-color);
+}
+
+#browse::file-selector-button {
+  // display: none;
 }

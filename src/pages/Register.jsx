@@ -10,19 +10,17 @@ const Register = () => {
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    const result = await axios.post(
-      'https://farmers-backend.onrender.com/api/user/register',
-      {
-        username,
-        email,
-        password,
-      }
-    );
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    await axios.post(`http://localhost:8000/api/user/register`, {
+      username,
+      email,
+      password,
+    });
     navigate('/login');
 
-    console.log(result);
+    // console.log(result);
   };
 
   const handleGoogleAuth = () => {};

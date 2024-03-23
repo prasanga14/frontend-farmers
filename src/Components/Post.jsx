@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BiBookmark,
   BiCommentDetail,
@@ -8,10 +8,34 @@ import {
 import { ImShare } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
+import axios from 'axios';
 
 const Post = ({ post }) => {
-  console.log('The post id is: ' + post._id);
-  console.log(post.image);
+  const [loggedUser, setLoggedUser] = useState('');
+
+  let showDelete;
+
+  if (loggedUser === 'Admin') {
+    showDelete = true;
+  }
+
+  const getLoggedUser = async () => {
+    const user = await axios.get(
+      `http://localhost:8000/api/user/u/${localStorage.getItem('id')}`
+    );
+
+    setLoggedUser(user.data.user.username);
+  };
+
+  getLoggedUser();
+
+  const deletePost = async () => {
+    const response = await axios.delete(
+      `http://localhost:8000/api/post/delete-post/${post._id}`
+    );
+
+    console.log('Post deletion sucessfull!!!');
+  };
 
   return (
     <div className="post__content">
@@ -35,6 +59,11 @@ const Post = ({ post }) => {
             <li>
               <BiDotsVerticalRounded />
             </li>
+            {showDelete && (
+              <li class="material-symbols-outlined" onClick={deletePost}>
+                delete
+              </li>
+            )}
           </ul>
         </div>
         <p className="post__text">{post.text}</p>
@@ -42,7 +71,7 @@ const Post = ({ post }) => {
       <div className="post__preview">
         <Link to={`/post/${post._id}`}>
           <img
-            src={`https://farmers-backend.onrender.com/images/${post.image}`}
+            src={`http://localhost:8000/images/${post.image}`}
             alt="FarmersMedia post"
           />
         </Link>

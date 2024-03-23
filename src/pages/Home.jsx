@@ -1,5 +1,5 @@
-import React from "react";
-import "../Styles/home.scss";
+import React, { useEffect, useState } from 'react';
+import '../Styles/home.scss';
 import {
   Navbar,
   Sidebar,
@@ -7,7 +7,7 @@ import {
   HomeLoader,
   Posts,
   Share,
-} from "../Components";
+} from '../Components';
 
 const Home = () => {
   return (

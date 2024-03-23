@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Post } from './';
 import '../Styles/posts.scss';
 import axios from 'axios';
+import env from 'react-dotenv';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getAllPosts = async () => {
       const result = await axios.get(
-        'https://farmers-backend.onrender.com/api/post/all-posts'
+        `http://localhost:8000/api/post/all-posts`
       );
       // console.log(result.data);
       setPosts(result.data);
@@ -17,7 +18,7 @@ const Posts = () => {
 
     getAllPosts();
   }, []);
-  console.log(posts);
+  // console.log(posts);
 
   return (
     <div className="posts__container">

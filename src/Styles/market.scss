@@ -3,6 +3,7 @@
 
 .App {
   flex-direction: column;
+  justify-content: center;
 }
 
 .heading__market {
@@ -17,8 +18,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  // justify-content: space-around;
-  height: 50%;
 
   .marketplace__item {
     width: 200px;
