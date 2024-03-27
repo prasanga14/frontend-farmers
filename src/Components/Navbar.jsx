@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 import { user } from '../Images';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const Navbar = () => {
   const id = localStorage.getItem('id');
@@ -15,9 +16,7 @@ const Navbar = () => {
   useEffect(() => {
     const getLoggedUser = async (id) => {
       try {
-        const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/user/u/${id}`
-        );
+        const result = await axios.get(`${BASE_URL}api/user/u/${id}`);
         setProfileName(result.data.user.username);
       } catch (error) {
         console.error('Error fetching user data:', error);

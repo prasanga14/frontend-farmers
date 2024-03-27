@@ -3,6 +3,7 @@ import '../Styles/auth.scss';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const Register = () => {
   const [username, setUsername] = useState();
@@ -13,7 +14,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios.post(`https://farmers-backend.onrender.com/api/user/register`, {
+    await axios.post(`${BASE_URL}api/user/register`, {
       username,
       email,
       password,

@@ -2,7 +2,7 @@ import { Outlet, Navigate, Route } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { AdminDashboard, Home } from '../pages';
-import env from 'react-dotenv';
+import { BASE_URL } from '../Constants/apiUrl';
 
 // Component for private routes
 const PrivateRoutes = () => {
@@ -13,9 +13,7 @@ const PrivateRoutes = () => {
   useEffect(() => {
     const getLoggedUser = async (id) => {
       try {
-        const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/user/u/${id}`
-        );
+        const result = await axios.get(`${BASE_URL}api/user/u/${id}`);
         setUser(result.data);
       } catch (error) {
         // Handle error

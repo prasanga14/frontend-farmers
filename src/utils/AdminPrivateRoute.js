@@ -1,6 +1,7 @@
 import { Outlet, Navigate } from 'react-router-dom';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const AdminPrivateRoute = () => {
   const [user, setUser] = useState(null);
@@ -8,9 +9,7 @@ const AdminPrivateRoute = () => {
 
   useEffect(() => {
     const getLoggedUser = async (id) => {
-      const result = await axios.get(
-        `https://farmers-backend.onrender.com/api/user/u/${id}`
-      );
+      const result = await axios.get(`${BASE_URL}api/user/u/${id}`);
       // console.log(result.data.user);
       setUser(result.data);
       // console.log('AdminPrivate: ', user);

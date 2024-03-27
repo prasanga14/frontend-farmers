@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from 'react';
-// import { posts } from '../Constants/dummy';
 import { Post } from './';
 import '../Styles/posts.scss';
 import axios from 'axios';
-import env from 'react-dotenv';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const Posts = () => {
   const [posts, setPosts] = useState([]);
   useEffect(() => {
     const getAllPosts = async () => {
-      const result = await axios.get(
-        `https://farmers-backend.onrender.com/api/post/all-posts`
-      );
+      const result = await axios.get(`${BASE_URL}api/post/all-posts`);
       // console.log(result.data);
       setPosts(result.data);
     };

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import '../Styles/makePost.scss';
 import { useNavigate } from 'react-router-dom';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const MakePost = () => {
   const [userId, setUserId] = useState('');
@@ -14,9 +15,7 @@ const MakePost = () => {
   const id = localStorage.getItem('id');
 
   const getLoggedUser = async (id) => {
-    const result = await axios.get(
-      `https://farmers-backend.onrender.com/api/user/u/${id}`
-    );
+    const result = await axios.get(`${BASE_URL}api/user/u/${id}`);
     // console.log(result.data.user);
     setUserId(result.data.user._id);
     setUsername(result.data.user.username);
@@ -33,7 +32,7 @@ const MakePost = () => {
     // formData.append('image', image);
 
     const result = await axios.post(
-      `https://farmers-backend.onrender.com/api/post/upload-image`,
+      `${BASE_URL}api/post/upload-image`,
       { userId, username, image, text, profile },
       { headers: { 'Content-Type': 'multipart/form-data' } }
     );

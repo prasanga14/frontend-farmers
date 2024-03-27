@@ -9,6 +9,7 @@ import { ImShare } from 'react-icons/im';
 import { Link } from 'react-router-dom';
 import formatDistanceToNow from 'date-fns/formatDistanceToNow';
 import axios from 'axios';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const Post = ({ post }) => {
   const [loggedUser, setLoggedUser] = useState('');
@@ -21,9 +22,7 @@ const Post = ({ post }) => {
 
   const getLoggedUser = async () => {
     const user = await axios.get(
-      `https://farmers-backend.onrender.com/api/user/u/${localStorage.getItem(
-        'id'
-      )}`
+      `${BASE_URL}api/user/u/${localStorage.getItem('id')}`
     );
 
     setLoggedUser(user.data.user.username);
@@ -33,7 +32,7 @@ const Post = ({ post }) => {
 
   const deletePost = async () => {
     const response = await axios.delete(
-      `https://farmers-backend.onrender.com/api/post/delete-post/${post._id}`
+      `${BASE_URL}api/post/delete-post/${post._id}`
     );
 
     console.log('Post deletion sucessfull!!!');
@@ -73,7 +72,7 @@ const Post = ({ post }) => {
       <div className="post__preview">
         <Link to={`/post/${post._id}`}>
           <img
-            src={`https://farmers-backend.onrender.com/images/${post.image}`}
+            src={`${BASE_URL}images/${post.image}`}
             alt="FarmersMedia post"
           />
         </Link>

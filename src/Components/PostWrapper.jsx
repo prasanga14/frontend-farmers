@@ -1,6 +1,5 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-// import { comments /*posts */ } from '../Constants/dummy';
 import { ImShare } from 'react-icons/im';
 import { user } from '../Images';
 import { Link } from 'react-router-dom';
@@ -12,6 +11,7 @@ import {
   BiLike,
   BiSmile,
 } from 'react-icons/bi';
+import { BASE_URL } from '../Constants/apiUrl';
 
 const PostWrapper = () => {
   const [post, setPost] = useState({});
@@ -23,9 +23,7 @@ const PostWrapper = () => {
   useEffect(() => {
     const getLoggedUser = async (id) => {
       try {
-        const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/user/u/${id}`
-        );
+        const result = await axios.get(`${BASE_URL}api/user/u/${id}`);
         setLoggedUser(result.data.user);
       } catch (error) {
         console.error('Error fetching logged user:', error);
@@ -46,7 +44,7 @@ const PostWrapper = () => {
     const getSinglePost = async (postId) => {
       try {
         const result = await axios.get(
-          `https://farmers-backend.onrender.com/api/post/single-post/${postId}`
+          `${BASE_URL}api/post/single-post/${postId}`
         );
         setPost(result.data);
         setComments(result.data.comments || []);
@@ -72,12 +70,9 @@ const PostWrapper = () => {
     if (!userComment) return;
 
     try {
-      await axios.post(
-        `https://farmers-backend.onrender.com/api/post/add-comment/${currPostId}`,
-        {
-          comment: newUserComment,
-        }
-      );
+      await axios.post(`${BASE_URL}api/post/add-comment/${currPostId}`, {
+        comment: newUserComment,
+      });
 
       setComments([...comments, newUserComment]);
       setUserComment(() => '');
@@ -96,7 +91,7 @@ const PostWrapper = () => {
         )
       ) {
         await axios.delete(
-          `https://farmers-backend.onrender.com/api/post/delete-comment/${currPostId}/${commentId}`
+          `${BASE_URL}api/post/delete-comment/${currPostId}/${commentId}`
         );
         setComments(
           comments.filter((comment) => comment.commentId !== commentId)
@@ -113,10 +108,7 @@ const PostWrapper = () => {
     <div className="post__wrapper">
       <div className="post__wrapper__container">
         <div className="post__img">
-          <img
-            src={`https://farmers-backend.onrender.com/images/${post.image}`}
-            alt=""
-          />
+          <img src={`${BASE_URL}images/${post.image}`} alt="" />
         </div>
         <div className="post__wrapper__content">
           <div className="user__post">
